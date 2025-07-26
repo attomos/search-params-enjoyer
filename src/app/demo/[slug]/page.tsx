@@ -4,10 +4,12 @@ import { loadSearchParams } from "@/app/searchParams";
 
 type PageProps = {
   searchParams: Promise<SearchParams>;
+  params: Promise<{ slug: string }>;
 };
 
-export default async function Home({ searchParams }: PageProps) {
+export default async function Home({ searchParams, params }: PageProps) {
   const { visibleWorkflows } = await loadSearchParams(searchParams);
+  const { slug } = await params;
 
-  return <MainSection visibleWorkflows={visibleWorkflows} />;
+  return <MainSection visibleWorkflows={visibleWorkflows} slug={slug} />;
 }
